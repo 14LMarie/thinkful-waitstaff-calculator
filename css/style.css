@@ -1,0 +1,141 @@
+/* CSS reset
+(all the browsers will see the website in the same by setting every tag to 0 (the website will look the same on all browsers))
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    /*The box-sizing property is used to tell the browser what the sizing properties (width and height) should include border-box.*/
+    box-sizing: border-box;
+}
+
+
+/* General styles
+(the styles used everywhere in the page (like the Body) or styles which are used in more than 2 of the modules bellow (h2, h3, h4, h5, h6, p, a, ul, li))
+*/
+
+body {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1,
+h2 {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+article {
+    border: 1px solid;
+}
+
+button {
+    padding: 0.3rem;
+    margin: 1rem 0;
+    border: 1px solid;
+    background-color: white;
+    -moz-box-shadow: 2px 3px 4px 0px #000;
+    -webkit-box-shadow: 2px 3px 4px 0px #000;
+    box-shadow: 2px 3px 4px 0px #000;
+}
+
+
+/* Header styles
+(all the styles inside the < header > or < nav > tags)
+*/
+
+h1 {
+    font-size: 2rem;
+}
+
+
+/* Content styles
+(all the styles inside the < sections > or < aside > tags)
+*/
+
+h1,
+h2 {
+    text-align: center;
+}
+
+section.container {
+    display: flex;
+}
+
+div.left-half {
+    flex: 1;
+    padding: 1rem;
+}
+
+div.right-half {
+    flex: 1;
+    padding: 1rem;
+}
+
+article.meal-details {
+    text-align: center;
+}
+
+article.meal-details .input-wrapper {
+    margin: 0.7rem 0;
+}
+
+article.meal-details label {
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 10rem;
+    text-align: right;
+}
+
+article.meal-details input {
+    display: inline-block;
+    float: left;
+    margin-left: 0.5rem;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+.meal-details button {
+    margin-top: 7rem;
+    margin-bottom: 2.3rem;
+}
+
+article.customer-charges {
+    margin-bottom: 1rem;
+}
+
+.customer-charges,
+.earnings-info {
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+hr.header-separation {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    margin-bottom: 2rem;
+}
+
+hr.solid {
+    color: black;
+    background-color: black;
+    border: 0;
+    height: 1px;
+    margin: 0.2rem 0
+}
+
+
+/* Footer styles
+(all the styles inside the < footer > tag)
+*/
+
+
+/* Responsive styles
+(the very last module in the CSS, contains all the media queries and it is dealing with the compatibility with mobiles and tablets)
+*/
