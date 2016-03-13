@@ -1,47 +1,65 @@
 angular.module('myApp', [])
     .controller('calculations', ['$scope', function ($scope) {
-
-
+        $scope.mealCount = 1;
 
         $scope.submit = function () {
-            console.log($scope.submit)
-            var meals = [];
-            var price = parseFloat($scope.price);
-            var tax = parseFloat($scope.tax);
-            var tip = parseFloat($scope.tip);
-            //console.log(meal.price)
-
             if ($scope.myForm.$valid) {
+                $scope.mealCount++;
+
+                var price = parseFloat($scope.price);
+                var tax = parseFloat($scope.tax);
+                var tip = parseFloat($scope.tip);
+
                 //customer-charges
+                $scope.customerSubtotal = price + (price * (tax / 100));
+                $scope.customerTip = $scope.customerSubtotal * (tip / 100);
+                $scope.customerTotal = $scope.customerSubtotal + $scope.customerTip;
 
-                var subtotal = price + (price * (tax / 100));
-                var tipTotal = subtotal * (tip / 100);
-                var total = subtotal + tip;
-
-
-
-
-                console.log()
-                    //earnings-info
-                    /*$scope.earnings.tipTotal =
-                        $scope.earnings.mealCount =
-                        $scope.earnings.average =*/
+                //clear user input from form
+                $scope.cancelMeal();
             }
         };
 
-
-        //clear meal data
-        /*var defaultForm = {
-            price: "",
-            tax: "",
-            tip: ""
-        }
-        $scope.resetForm = function ()
-        $scope.meal = defaultForm;
-        $scope.myForm.$setPristine();
-        $scope.myForm.$setValidity();
-        $scope.myForm.$setUntouched(); */
-        //reset all data
-
-
+        //clear meal details
+        $scope.cancelMeal = function () {
+            $scope.price = "";
+            $scope.tax = "";
+            $scope.tip = "";
+        };
     }])
+
+.controller('earnings', ['$scope', function ($scope) {
+        var meals = [];
+
+        var earningsData = {
+            mealCount: 0,
+            tipTotal: 0,
+            tipAverage: 0
+        };
+
+        return {
+            addMeal: function (meal) {
+                meals.push(meal);
+                earningsData.mealCount++;
+                earningsData.tipTotal += meal.customerTip;
+                earningsData.tipAverage = (earningsData.tipTotal / earningsData.mealCount);
+            },
+            getMeals: function () {
+                return meals;
+            },
+            getEarningsData: function () {
+                return earningsData;
+            },
+            clearAll: function () {
+                meals.length = 0;
+                earningsData = {
+                    mealCount: 0,
+                    tipTotal: 0,
+                    tipAverage: 0
+                };
+            }
+        };
+    }])
+    //define meal count
+    //define tip total
+    //define tip average
