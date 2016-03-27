@@ -41,6 +41,7 @@
                 <hr class="header-separation">
                 <label>Subtotal:</label>
                 <p ng-repeat="meal in meals">{{ meal.subtotal | currency}}</p>
+                <br>
                 <label>Tip:</label>
                 <p ng-repeat="meal in meals">{{ meal.tip | currency }}</p>
                 <hr class="solid">

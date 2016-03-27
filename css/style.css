@@ -22,12 +22,6 @@ body {
     margin-right: auto;
 }
 
-h1,
-h2 {
-    text-align: center;
-    padding: 1rem 0;
-}
-
 article {
     border: 1px solid;
 }
@@ -37,10 +31,6 @@ article {
 (all the styles inside the < header > or < nav > tags)
 */
 
-h1 {
-    font-size: 2rem;
-}
-
 
 /* Content styles
 (all the styles inside the < sections > or < aside > tags)
@@ -49,6 +39,7 @@ h1 {
 h1,
 h2 {
     text-align: center;
+    padding: 0.5rem 0;
 }
 
 section.container {

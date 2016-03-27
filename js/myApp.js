@@ -1,6 +1,6 @@
 var app = angular.module('myApp', [])
 
-app.service('earnings', function () {
+app.service('earningsService', function () {
     var meals = [];
 
     var earningsData = {
@@ -15,7 +15,6 @@ app.service('earnings', function () {
             earningsData.mealCount++;
             earningsData.tipTotal += meal.tip;
             earningsData.tipAverage = (earningsData.tipTotal / earningsData.mealCount);
-            console.log(earningsData)
         },
         getMeals: function () {
             return meals;
@@ -34,8 +33,18 @@ app.service('earnings', function () {
     };
 });
 
-app.controller('detailsController', function ($scope, earnings) {
+app.controller('detailsController', function ($scope, earningsService) {
     $scope.mealCount = 1;
+
+    $scope.getMealCount = function () {
+        var meals = earningsService.getMeals();
+        console.log(meals);
+        if (typeof meals != "undefined" && meals !== null && meals.length > 0) {
+            $scope.mealCount = meals.length + 1;
+        }
+    };
+
+    $scope.getMealCount();
 
     //clear meal details
     $scope.cancelMeal = function () {
@@ -62,7 +71,7 @@ app.controller('detailsController', function ($scope, earnings) {
                 tip: $scope.customerTip,
                 total: $scope.customerTotal
             };
-            earnings.addMeal(meal);
+            earningsService.addMeal(meal);
 
             //clear user input from form
             $scope.cancelMeal();
@@ -71,9 +80,10 @@ app.controller('detailsController', function ($scope, earnings) {
 });
 
 
-app.controller('chargesController', function ($scope, earnings) {
+app.controller('chargesController', function ($scope, earningsService) {
+    console.log(earningsService);
     $scope.getMeals = function () {
-        var meals = earnings.getMeals();
+        var meals = earningsService.getMeals();
         $scope.meals = meals;
         console.log($scope.meals);
     };
@@ -93,17 +103,17 @@ app.controller('chargesController', function ($scope, earnings) {
 });
 
 
-app.controller('earningsController', function ($scope, earnings) {
-    $scope.mealCount = earningsData.mealCount;
-    $scope.tipTotal = earningsData.getEarningsData().tipTotal;
-    $scope.tipAverage = earningsData.getEarningsData().tipAverage;
+app.controller('earningsController', function ($scope, earningsService) {
+    $scope.mealCount = earningsService.getEarningsData().mealCount;
+    $scope.tipTotal = earningsService.getEarningsData().tipTotal;
+    $scope.tipAverage = earningsService.getEarningsData().tipAverage;
 
 });
 
 
 //rest entire calculator
-app.controller('resetController', function ($scope, earnings) {
+app.controller('resetController', function ($scope, earningsService) {
     $scope.clearAll = function () {
-        earnings.clearAll();
+        earningsService.clearAll();
     };
 });
