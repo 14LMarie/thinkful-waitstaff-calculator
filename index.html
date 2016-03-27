@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="css/style.css" text="text/css">
 </head>
 
-<body ng-controller="earnings">
+<body>
     <header>
         <h1>Waitstaff Calculator</h1>
     </header>
-    <section class="container" ng-controller="calculations">
+    <section class="container">
         <div class="left-half">
-            <article class="meal-details">
+            <article class="meal-details" ng-controller="detailsController">
                 <h2>Enter the Meal Details</h2>
                 <hr class="header-separation">
                 <form name="myForm" ng-submit="submit()">
@@ -36,18 +36,18 @@
             </article>
         </div>
         <div class="right-half">
-            <article class="customer-charges">
+            <article class="customer-charges" ng-controller="chargesController">
                 <h2>Customer Charges</h2>
                 <hr class="header-separation">
                 <label>Subtotal:</label>
-                <p>{{ customerSubtotal | currency}}</p>
+                <p ng-repeat="meal in meals">{{ meal.subtotal | currency}}</p>
                 <label>Tip:</label>
-                <p>{{ customerTip | currency }}</p>
+                <p ng-repeat="meal in meals">{{ meal.tip | currency }}</p>
                 <hr class="solid">
                 <label>Total:</label>
-                <p>{{ customerTotal | currency}}</p>
+                <p ng-repeat="meal in meals">{{ meal.total | currency}}</p>
             </article>
-            <article class="earnings-info">
+            <article class="earnings-info" ng-controller="earningsController">
                 <h2>My Earnings info</h2>
                 <hr class="header-separation">
                 <label>Meal Count:</label>
@@ -59,7 +59,9 @@
             </article>
         </div>
     </section>
-    <input class="btn" type="reset" id="reset" value="Reset" ng-click="clearAll()">
+    <div ng-controller="resetController">
+        <input class="btn" type="reset" id="reset" value="Reset" ng-click="clearAll()">
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.js"></script>
     <script type="text/javascript" src="https://code.angularjs.org/1.2.18/angular-animate.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
